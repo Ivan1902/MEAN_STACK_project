@@ -1,0 +1,60 @@
+div.pieChart{
+    width: 800px;
+    height: 400px;
+}
+
+img{
+    width: 100px;
+    height: 100px;
+}
+tr.centar{
+    align-content: center;
+    align-self: center;
+    text-align: center;
+}
+td.centar{
+    align-content: center;
+    align-self: center;
+    text-align: center;
+}
+
+img.smanji{
+    width:35px;
+    height: 35px;
+}
+
+form.desno{
+    float: right;
+}
+
+/* .notification {
+    background-color: dodgerblue; 
+    color: black;
+    text-decoration: none;
+    padding: 10px 20px;
+    position: relative;
+    display: inline-block; 
+     border-radius: 2px; 
+  } */
+  
+ /* .notification:hover {
+    background: red;
+  }  */
+  
+  /* .notification .badge {
+    position: absolute;
+    top: 5px; 
+    right: 9px;
+    padding: 2px 7px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+  } */
+
+  body{
+      background-color: #d3d3d3;
+  }
+  div.boja{
+      background-color: #d3d3d3;
+  }
+  

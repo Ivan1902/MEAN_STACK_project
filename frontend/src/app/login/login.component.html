@@ -1,0 +1,37 @@
+
+<body>
+    <br>
+    <h1> Login </h1>
+    <br> <br> <br>
+<form>
+    <table>
+        <tr>
+            <td> <h4>Username:</h4> </td>
+            <td> <h4><input type='text' name='username' [(ngModel)]='username'/> </h4></td>
+        </tr>
+        <tr>
+            <td> <h4>Password:</h4> </td>
+            <td> <h4><input type='password' name='passwrod' [(ngModel)]='password'/></h4> </td>
+        </tr>
+        <tr>
+             <td colspan="2"> <button (click)='login()' style="height: 30px; width:70px;"><b>Login</b></button></td>
+             
+        </tr>
+    </table>
+    <br>
+    <table>
+        <tr *ngIf='message'>
+            <td> <h4> <i> {{message}} </i></h4></td>       
+        </tr>
+        <tr>
+            <h4><a [routerLink]="['/zaboravljena']">Zaboravili ste sifru?</a></h4>
+        </tr>
+        <tr>
+             <h4> Nemate nalog? Registrujte se <a [routerLink]="['/registracija']">ovde</a></h4>
+        </tr>
+        <tr>
+             <h4><a [routerLink]="['/gost']"> Prijavite se kao gost </a> </h4>
+        </tr>
+    </table>
+</form>
+</body>

@@ -1,0 +1,14 @@
+textarea{
+    width: auto;
+    height: 2cm;
+}
+.desno{
+    float: right;
+}
+
+div.boja{
+    background-color: #d3d3d3;
+}
+body{
+    background-color: #d3d3d3;
+}

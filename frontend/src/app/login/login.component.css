@@ -1,0 +1,22 @@
+body{
+    background-color: #d3d3d3;
+    vertical-align: middle;
+    margin: 0 auto;
+    
+    
+}
+table{
+    align-content: center;
+    margin: 0 auto;
+    vertical-align: middle;
+    
+}
+h1{
+    align-content: center;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 50px;
+}
+td,tr{
+    text-align: center;
+}

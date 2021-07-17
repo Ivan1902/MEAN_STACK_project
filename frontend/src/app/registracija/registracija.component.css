@@ -1,0 +1,36 @@
+/* input[type='file']{
+    visibility: hidden;
+} */
+
+.desno{
+    float: right;
+}
+
+body{
+    background-color: #d3d3d3;
+    margin: 0 auto;
+}
+
+table{
+    align-content: center;
+    margin: 0 auto;
+    vertical-align: middle;
+    
+}
+h1{
+    align-content: center;
+    text-align: center;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 50px; 
+}
+form{
+    align-content: center;
+    margin: 0 auto;
+    
+}
+div{
+    align-content: center;
+    margin: 0 auto;
+    text-align: center;
+}

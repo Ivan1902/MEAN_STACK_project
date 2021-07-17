@@ -1,0 +1,12 @@
+img{
+    height: 100px;
+    width: 100px;
+    float: left;
+}
+h1{
+    float: center;
+    text-align: center;
+}
+div.clearfix{
+    overflow: auto;
+}

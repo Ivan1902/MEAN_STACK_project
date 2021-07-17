@@ -1,0 +1,65 @@
+<body>
+<form class='desno'>
+    <button (click)='nazad()' style="height: 50px; width: 75px;"> Nazad</button>
+</form>
+<br> <br> <br>
+<h1>Registracija</h1>
+<br> <br>
+<form id = "myForm" >
+    <table>
+        <tr>
+            <td>Ime:</td>
+            <td> <input type='text' name='ime' [(ngModel)]='ime'/></td>
+        </tr>
+        <tr>
+            <td>Prezime:</td>
+            <td> <input type='text' name='prezime' [(ngModel)]='prezime'/></td>
+        </tr>
+   
+        <tr>
+            <td>Slika profila:</td>
+            <!-- <td> <button (click)="filePicker.click()">Odaberi</button></td> -->
+            <td> <input type='file' name='slika' (change)="odabranaSlika($event)" /></td>
+        </tr>
+   
+        <tr>
+            <td>Korisnicko ime:</td>
+            <td> <input type='text' id='username' name='username' [(ngModel)]='username'/></td>
+        </tr>
+        <tr>
+            <td>Lozinka:</td>
+            <td> <input type='password' name='password' [(ngModel)]='password'/></td>
+        </tr>
+        <tr>
+            <td>Lozinka(potvrda):</td>
+            <td> <input type='password' name='password1' [(ngModel)]='password1'/></td>
+        </tr>
+        <tr>
+            <td>Datum rodjenja:</td>
+            <td> <input type='date' name='datumRodj' [(ngModel)]='datumRodj'/></td>
+        </tr>
+        <tr>
+            <td>Grad:</td>
+            <td> <input type='text' name='grad' [(ngModel)]='grad'/></td>
+        </tr>
+        <tr>
+            <td>Drzava:</td>
+            <td> <input type='text' name='drzava' [(ngModel)]='drzava'/></td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td> <input type='email' name='email' [(ngModel)]='email'/></td>
+        </tr>
+       
+    </table>
+</form>
+<div align='center' style="text-align:center !important; margin: 0 auto !important">
+    <re-captcha (resolved)="resolved($event)" siteKey="6Ldy77sZAAAAAKNdQFLNyec_rDoFmjxnio3se70x" style="text-align:center; margin: 0 auto; display: inline-block" ></re-captcha>
+</div>
+
+<form style="text-align:center; margin: 0 auto">
+    <button (click)='registruj()'>Registruj se</button>
+</form >
+<div *ngIf='poruka' style="align-items: center;"> <i>{{ poruka }}</i></div>
+
+</body>

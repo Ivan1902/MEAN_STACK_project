@@ -1,0 +1,61 @@
+<body>
+<form class='desno'>
+    <button (click)='nazad()' style="height: 50px; width: 75px;"> Nazad</button>
+</form>
+
+<h1> Gost </h1>
+<form>
+    <table>
+        <tr>
+            <td> Naziv knjige: </td>
+            <td> <input type='text' name='naziv' [(ngModel)]='naziv'></td>
+        </tr>
+        <tr>
+            <td> Autor knjige: </td>
+            <td> <input type='text' name='autor' [(ngModel)]='autor'></td>
+        </tr>
+        <tr>
+            <td> Zanr knjige: </td>
+            <td> 
+                <select name='zanr' [(ngModel)]='zanr' >
+                    <option *ngFor='let zanr of sviZanrovi'> {{zanr.naziv}} </option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button (click)='pretrazi()'>Pretrazi</button>
+            </td>
+        </tr>
+        <tr *ngFor='let knjiga of pretrazeneKnjige'>
+            <td *ngIf='knjiga.odobrena'><a (click)='stranica(knjiga)'>{{ knjiga.naziv }}</a></td>
+            <td *ngIf='!knjiga.odobrena' bgcolor="grey"><a (click)='stranica(knjiga)'>{{ knjiga.naziv }}</a></td>
+            
+        </tr>
+    </table>
+</form>
+<hr>
+<div *ngIf='aktivnaDesavanja.length'>
+<h3>Aktivna desavanja</h3>
+    <ui *ngFor='let desavanje of aktivnaDesavanja'>
+        <li> {{ desavanje.naziv }}</li>
+    </ui>
+    <hr>
+</div>
+<div *ngIf='!aktivnaDesavanja.length'>
+    Nema aktivnih desavanja!
+    <hr>
+</div>
+
+<div *ngIf='buducaDesavanja.length'>
+    <h3>Buduca desavanja</h3>
+        <ui *ngFor='let desavanje of buducaDesavanja'>
+            <li> {{ desavanje.naziv }}, pocetak: {{desavanje.pocetak}}</li>
+        </ui>
+        <hr>
+    </div>
+    <div *ngIf='!buducaDesavanja.length'>
+        Nema buducih desavanja!
+        <hr>
+    </div>
+    </body>

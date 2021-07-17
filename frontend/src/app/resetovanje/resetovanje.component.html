@@ -1,0 +1,23 @@
+<body>
+<h1> Resetovanje </h1>
+<form>
+    <table>
+        <tr>
+            <td>Nova lozinka:</td>
+            <td> <input type='password' name='lozinka' [(ngModel)]='lozinka'></td>
+        </tr>
+        <tr>
+            <td>Nova lozinka(ponovo):</td>
+            <td> <input type='password' name='lozinka1' [(ngModel)]='lozinka1'></td>
+        </tr>
+        <tr>
+            <td> <button (click)='izmeni()'>Izmeni</button></td>
+        </tr>
+        <tr>
+            <td *ngIf='poruka'>
+                {{poruka}}
+            </td>
+        </tr>
+    </table>
+</form>
+</body>

@@ -1,0 +1,93 @@
+<body>
+<form class='desno'>
+    <button (click)='nazad()' style="height: 50px; width: 75px;"> Nazad</button>
+</form>
+
+<h1> Knjiga </h1>
+<form>
+    <table>
+        <tr>
+            <td>
+                Slika:
+            </td>
+            <td>
+                <img [src]="knjiga.slika">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Naziv:
+            </td>
+            <td>
+                {{knjiga.naziv}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Autor:
+            </td>
+            <td>
+                <div *ngFor='let tmp of knjiga.autor'>
+                    {{tmp}}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Datum:
+            </td>
+            <td>
+                {{knjiga.datum}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Zanr
+            </td>
+            <td >
+                <div *ngFor='let tmp of knjiga.zanr; let i=index'>
+                    {{tmp}}
+                    
+                </div>
+               
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Opis
+            </td>
+            <td>
+                {{knjiga.opis}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Prosecna ocena:
+            </td>
+            <td *ngIf='knjiga.ocena'>
+                {{knjiga.ocena}}
+            </td>
+            <td *ngIf='!knjiga.ocena'>
+                <i>Nema ocene za ovu knjigu!</i>
+            </td>
+        </tr>
+    </table>
+</form>
+<hr>
+<div *ngIf='sviKomentari.length'>
+<h3>Komentari knjige:</h3>
+    <table>
+        <tr *ngFor='let komentar of sviKomentari'>
+            <th> {{ komentar.ime}} {{komentar.prezime}} :</th>
+            <td> {{komentar.tekst}}</td> |
+            <th> Ocena: </th>
+            <td> {{komentar.ocena }}</td>
+        </tr>
+    </table>
+    <hr>
+</div>
+<div *ngIf='!sviKomentari.length'>
+    Nema komentara za ovu knjigu!
+    <hr>
+</div>
+</body>

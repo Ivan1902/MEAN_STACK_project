@@ -1,0 +1,32 @@
+div.pieChart{
+    width: 800px;
+    height: 400px;
+}
+
+img{
+    width: 100px;
+    height: 100px;
+}
+tr.centar{
+    align-content: center;
+    align-self: center;
+    text-align: center;
+}
+td.centar{
+    align-content: center;
+    align-self: center;
+    text-align: center;
+}
+
+img.smanji{
+    width:35px;
+    height: 35px;
+}
+
+form.desno{
+    float: right;
+}
+
+div.boja{
+    background-color: #d3d3d3;
+}

@@ -1,0 +1,449 @@
+<body>
+<div class='boja'>
+<form class='desno' name="mojaForma">
+    
+    <!-- <a class="notification" (click)='prikaziObavestenja()'>
+        <span><img src="\assets\notifikacija.jpg" class='smanji' ></span>
+         <span>Obavestenja</span> 
+        <span class="badge">3</span>
+    </a> |  -->
+    <button *ngIf='!korisnik.obavestenja.length' style="background-color: dodgerblue; " (click)='obavestenje1()'><b>Obavestenja</b></button>
+    <button *ngIf='korisnik.obavestenja.length' style="background-color: red;" (click)='obavestenje1()'> Obavestenja({{korisnik.obavestenja.length}}) </button>  &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+    <button (click)='promeniLozinku()' style="background-color: dodgerblue;" > <b>Promeni lozinku</b></button>  &nbsp;&nbsp;&nbsp;  | &nbsp;&nbsp;&nbsp;
+    <button (click)='logout()' style="background-color: dodgerblue"> <b>Odjavi se</b> </button>
+    <br>
+    <div *ngIf='flag5'>
+        <ul *ngIf='korisnik.obavestenja.length'>
+            <li *ngFor='let tmp of korisnik.obavestenja; let i = index'> {{tmp}}  <button (click)='ukloniObavestenje(i)'>✔</button> </li>
+        </ul>
+        <div *ngIf='!korisnik.obavestenja.length'> <i>Nema novih obavestenja!</i></div>
+    </div>
+</form>
+<h1> Registrovani korisnik </h1>
+
+<form>
+    <table>
+        <tr>
+            <td>
+                Slika:
+            </td>
+            <td>
+                <img [src]="korisnik.slika">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Ime:
+            </td>
+            <td>
+                <output name='ime' *ngIf='!promena'>{{korisnik.ime}}</output>
+                <input type='text' name='ime' [(ngModel)]='korisnik.ime' *ngIf='promena'>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Prezime:
+            </td>
+            <td>
+                <output name='prezime' *ngIf='!promena'>{{korisnik.prezime}}</output>
+                <input type='text' name='prezime' [(ngModel)]='korisnik.prezime' *ngIf='promena'>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Datum rodjenja:
+            </td>
+            <td>
+                <output name='datumRodj' *ngIf='!promena'>{{korisnik.datumRodj}}</output>
+                <input type='text' name='datumRodj' [(ngModel)]='korisnik.datumRodj' *ngIf='promena'>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Grad:
+            </td>
+            <td >
+                <output name='grad' *ngIf='!promena'>{{korisnik.grad}}</output>
+                <input type='text' name='grad' [(ngModel)]='korisnik.grad' *ngIf='promena'>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Drzava:
+            </td>
+            <td>
+                <output name='drzava' *ngIf='!promena'>{{korisnik.drzava}}</output>
+                <input type='text' name='drzava' [(ngModel)]='korisnik.drzava' *ngIf='promena'>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Email:
+            </td>
+            <td>
+                <output name='email' *ngIf='!promena'>{{korisnik.email}}</output>
+                <input type='text' name='email' [(ngModel)]='korisnik.email' *ngIf='promena'>
+            </td>
+        </tr>
+        <tr>
+            <td>Aktivan:</td>
+            <td> {{korisnik.aktivan}}</td>
+        </tr>
+        <tr>
+            <td>
+                <button (click)='promeni()'>Promeni</button>
+            </td>
+            <td>
+                <button (click)='sacuvaj()'>Sacuvaj</button>
+            </td>
+        </tr>
+        
+    </table>
+    
+        <div *ngIf='poruka'>
+            {{poruka}}
+        </div>
+    
+</form>
+<hr>
+<form>
+
+    <table>
+        <tr>
+            <td>
+                <h3> Procitane knjige:</h3>
+            </td>
+            
+        </tr>
+        <tr>
+            <div *ngIf='procitao.length == 0'> Nema takvih knjiga!</div>
+            <ui *ngFor='let tmp of procitao'>
+                <li> <a (click)='odaberi(tmp)'>{{tmp.naziv}}</a></li>
+            </ui>
+        </tr>
+        <tr>
+            <td>
+                <h3> Knjige koje trenutno cita:</h3>
+            </td>
+            
+        </tr>
+        <tr>
+            <div *ngIf='cita.length == 0'> Nema takvih knjiga!</div>
+            <ui *ngFor='let tmp of cita'>
+                <li> <a (click)='odaberi(tmp)'>{{tmp.naziv}}</a></li>
+            </ui>
+        </tr>
+        <tr>
+            <td>
+                <h3> Knjige na cekanju:</h3>
+            </td>
+            
+        </tr>
+        <tr>
+            <div *ngIf='cekanje.length == 0'> Nema takvih knjiga!</div>
+            <ui *ngFor='let tmp of cekanje'>
+                <li> <a (click)='odaberi(tmp)'>{{tmp.naziv}}</a> | <button (click)='ukloni(tmp)'>Ukloni</button></li>
+                
+            </ui>
+        </tr>
+        <!-- <tr>
+            <td *ngFor='let tmp of zanrovi'>
+                {{tmp}}
+            </td>
+        </tr>
+        <tr>
+            <td *ngFor='let tmp of procenat'>
+                {{tmp}}
+            </td>
+        </tr> -->
+       
+    </table>
+</form>
+<hr>
+<form *ngIf='procitao.length != 0'>
+    
+        
+             <h3> Pie Chart procitanih knjiga</h3>
+        
+        
+            <div class='pieChart'>
+                <canvas baseChart
+                    [data]='pieChartData'
+                    [labels]='pieChartLabels'
+                    [chartType]='pieChartType'
+                    [options]='pieChartOptions'
+                    [plugins]='pieChartPlugins'
+                    
+                    [legend]='pieChartLegend'>
+                </canvas>
+            </div>
+        
+    
+</form>
+<hr>
+<h3>Moji komentari:</h3>
+<table border='1px' *ngIf='mojiKomentari.length'>
+    <tr align="center">
+        <th> Naziv knjige</th>
+        <th> Autor </th>
+        <th> Ocena </th>
+        <th> Komentar </th>
+    </tr>
+    <tr *ngFor='let tmp of mojiKomentari' align='center'> 
+        <td> <a (click)='odaberi1(tmp.knjiga)'>{{tmp.knjiga}}</a></td>
+        <td> {{tmp.autor}}</td>
+        <td> {{tmp.ocena}}</td>
+        <td> {{tmp.tekst}}</td>
+    </tr>
+</table>
+<div *ngIf='!mojiKomentari.length'><i>Nisi komentarisao ni jednu knjigu!</i></div>
+<br> <br>
+<hr>
+<h3>Pretraga korisnika:</h3>
+<table>
+    <tr>
+        <td>Ime:</td>
+        <td> <input type='text' name='ime' [(ngModel)]='ime'></td>
+    </tr>
+    <tr>
+        <td>Prezime:</td>
+        <td><input type='text' name='prezime' [(ngModel)]='prezime'></td>
+    </tr>
+    <tr>
+        <td>Korisnicko ime:</td>
+        <td><input type='text' name='username' [(ngModel)]='username'></td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+        <td><input type="text" name='email' [(ngModel)]='email'></td>
+    </tr>
+    <tr>
+        <button (click)='pretrazi()'> Pretrazi </button>
+    </tr>
+</table>
+<table *ngIf='flag1'>
+    <tr>
+        <th>Username</th>
+    </tr>
+    <tr *ngFor='let tmp of pretrazeniKorisnici'>
+        <a (click)='profil(tmp.username)'>{{tmp.username}}</a>
+    </tr>
+</table>
+<div *ngIf='flag2'> Ni jedan korisnik ne ispunjava kriterijum pretrage!</div>
+<br> <br>
+<hr>
+<h3>Pretraga knjiga</h3>
+<form>
+    <table>
+        <tr>
+            <td> Naziv knjige: </td>
+            <td> <input type='text' name='naziv' [(ngModel)]='naziv'></td>
+        </tr>
+        <tr>
+            <td> Autor knjige: </td>
+            <td> <input type='text' name='autor' [(ngModel)]='autor'></td>
+        </tr>
+        <tr>
+            <td> Zanr knjige: </td>
+            <td> <input type='text' name='zanr' [(ngModel)]='zanr'></td>
+        </tr>
+        <tr>
+            <td>
+                <button (click)='pretraziKnjige()'>Pretrazi</button>
+            </td>
+        </tr>
+        
+    </table>
+</form>
+
+<table *ngIf='flag3'>
+    <tr *ngFor='let knjiga of pretrazeneKnjige'>
+        <td *ngIf='knjiga.odobrena'><a (click)='odaberi(knjiga)'>{{ knjiga.naziv }}</a></td>
+        <td *ngIf='!knjiga.odobrena' bgcolor="grey"><a (click)='odaberi(knjiga)'>{{ knjiga.naziv }}</a></td>
+
+    </tr>
+</table>
+<div *ngIf='flag4'>
+    
+        Ni jedna knjiga ne ispunjava kriterijum pretrage!
+        <br> <br>
+        <h3>Unesi knjigu:</h3>
+    
+</div>
+<table *ngIf='flag4'>
+    
+    <tr>
+        <td>Slika knjige:</td>
+        <td> <input type='file' name='slika' (change)="odabranaSlika($event)" /></td>
+    </tr>
+    <tr>
+        <td>Naziv knjige:</td>
+        <td><input type='text' name='naziv' [(ngModel)]='nazivUnos'></td>
+    </tr>
+    <tr>
+        <td>Autor/Autori:</td>
+        <td><input type='text' name='autor' [(ngModel)]='autorUnos'></td>
+    </tr>
+    <tr>
+        <td>Datum izdavanja:</td>
+        <td><input type='date' name='datum' [(ngModel)]='datumUnos'> </td>
+    </tr>
+    <tr>
+        <td>Zanr</td>
+        <td> <select [(ngModel)]='zanrUnos'  multiple>
+            <option *ngFor='let zanr of sviZanrovi'>{{zanr.naziv}}</option>
+        </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Opis</td>
+        <td><input type='text' name='opis' [(ngModel)]='opisUnos'></td>
+    </tr>
+    <tr>
+        <td>Broj strana:</td>
+        <td> <input type='number' name='strane' [(ngModel)]='straneUnos' > </td>
+    </tr>
+    <tr>
+        <button (click)='dodajKnjigu()'>Dodaj knjigu</button>
+    </tr>
+    <tr *ngIf='poruka1'>
+        {{poruka1}}
+    </tr>
+</table>
+<br> <br>
+<hr>
+<h3> Dodavanje nove knjige: </h3>
+<table >
+    
+    <tr>
+        <td>Slika knjige:</td>
+        <td> <input type='file' name='slika1' (change)="odabranaSlika1($event)" /></td>
+    </tr>
+    <tr>
+        <td>Naziv knjige:</td>
+        <td><input type='text' name='naziv1' [(ngModel)]='nazivUnos1'></td>
+    </tr>
+    <tr>
+        <td>Autor/Autori:</td>
+        <td><input type='text' name='autor1' [(ngModel)]='autorUnos1'></td>
+    </tr>
+    <tr>
+        <td>Datum izdavanja:</td>
+        <td><input type='date' name='datum1' [(ngModel)]='datumUnos1'> </td>
+    </tr>
+    <tr>
+        <td>Zanr</td>
+        <td> <select [(ngModel)]='zanrUnos1'  multiple>
+            <option *ngFor='let zanr of sviZanrovi'>{{zanr.naziv}}</option>
+        </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Opis</td>
+        <td><input type='text' name='opis1' [(ngModel)]='opisUnos1'></td>
+    </tr>
+    <tr>
+        <td>Broj strana:</td>
+        <td> <input type='number' name='strane1' [(ngModel)]='straneUnos1' > </td>
+    </tr>
+    <tr>
+        <button (click)='dodajKnjigu1()'>Dodaj knjigu</button>
+    </tr>
+    <tr *ngIf='poruka4'>
+        {{poruka4}}
+    </tr>
+</table>
+<hr>
+<!-- <h3> Desavanja za koja mogu da se prijavim: </h3>
+<div *ngIf='desavanjaZaPrijavu.length == 0'>Nema takvih desavanja!</div>
+<table *ngIf='desavanjaZaPrijavu.length != 0'>
+    <tr class='centar'>
+        <th>Organizator</th>
+        <th>Naziv</th>
+        <th>Pocetak</th>
+        <th>Kraj</th>
+        <th>Opis</th>
+        <th>Ucesnici</th>
+    </tr>
+    <tr *ngFor='let tmp of desavanjaZaPrijavu' class='centar'>
+        <td>{{tmp.organizator}}</td>
+        <td>{{tmp.naziv}}</td>
+        <td *ngIf='tmp.pocetak'>{{tmp.pocetak}}</td>
+        <td *ngIf='!tmp.pocetak'>/</td>
+        <td *ngIf='tmp.kraj'>{{tmp.kraj}}</td>
+        <td *ngIf='!tmp.kraj'>/</td>
+        <td>{{tmp.opis}}</td>
+        <td *ngIf='tmp.ucesnici.length'>{{tmp.ucesnici}}</td>
+        <td *ngIf='!tmp.ucesnici.length'> / </td>
+        <td> <button (click)='prijavi_se(tmp)'>Prijavi se</button></td>
+        <td *ngIf='poruka2'> <i>{{poruka2}}</i></td>
+    </tr>
+</table>
+<br> 
+<hr> -->
+<h3> Napravi novo privatno desavanje:</h3>
+<mat-horizontal-stepper linear style="background-color: #d3d3d3;">
+    <mat-step label='Naziv' [completed]='nazivCompleted'>
+         Naziv desavanja: <input type='text' [(ngModel)]='nazivDesavanja'> |
+         <button (click)='nazivCompleted1()'>Potvrdi</button> |
+        <button mat-button matStepperNext>Next</button> 
+        <div *ngIf='porukaNaziv'>{{porukaNaziv}}</div>
+    </mat-step>
+    <mat-step label='Pocetak' [completed]='pocetakCompleted'>
+        Pocetak desavanja: <input type='date' [(ngModel)]='pocetakDesavanja'> |
+        <button mat-button matStepperPrevious>Previous</button> | 
+        <button (click)='pocetakCompleted1()'>Potvrdi</button> |
+        <button mat-button matStepperNext >Next</button> 
+        <br>
+        <i>Ukoliko ne popunite ovo polje  desavanje postaje aktivno odmah</i>
+
+    </mat-step>
+    <mat-step label='Kraj' [completed]='krajCompleted'>
+        Kraj desavanja: <input type='date' [(ngModel)]='krajDesavanja'> |
+        <button mat-button matStepperPrevious>Previous</button> | 
+        <button (click)='krajCompleted1()'>Potvrdi</button> |
+        <button mat-button matStepperNext >Next</button> 
+        <br>
+        <i>Ukoliko ne popunite ovo polje dogadjaj nema definisano trajanje</i>
+
+    </mat-step>
+    <mat-step label='Opis' [completed]='opisCompleted'>
+        Opis desavanja: <input type='text' [(ngModel)]='opisDesavanja'> |
+        <button mat-button matStepperPrevious>Previous</button> | 
+        <button (click)='opisCompleted1()'>Potvrdi</button> |
+        <button mat-button matStepperNext>Next</button> 
+
+    </mat-step>
+    <mat-step label='Ucesnici' [completed]='ucesniciCompleted'>
+        Ucesnici desavanja: <select multiple [(ngModel)]='ucesniciDesavanja'>
+                    <option *ngFor='let tmp of pratim'>{{tmp}}</option>
+                  </select> |
+        
+        <button mat-button matStepperPrevious>Previous</button> |
+        <button (click)='napravi()'> Napravi dogadjaj</button>
+        <div *ngIf='poruka3'>{{poruka3}}</div>
+    </mat-step>
+</mat-horizontal-stepper> 
+<br> <br>
+<hr>
+<h3>Pregledaj sva desavanja <a routerLink='/pregledDesavanja'>ovde</a></h3>
+<hr>
+<h3>Zahtevi za odobravanje pristupa desavanju</h3>
+<table *ngIf='zahteviZaOdobravanje.length'>
+    <tr *ngFor='let zahtev of zahteviZaOdobravanje'>
+        <td>
+            Korisnik: {{zahtev.korisnik}}, desavanje: {{zahtev.desavanje}}
+        </td>
+        <td>
+            <button (click)='odobri(zahtev)'>Odobri</button>
+        </td>
+        <td>
+            <button (click)='odbij(zahtev)'>Odbij</button>
+        </td>
+    </tr>
+</table>
+<div *ngIf='!zahteviZaOdobravanje.length'>
+    <i>Nema zahteva koje mogu da odobrim!</i>
+</div>
+</div>
+</body>

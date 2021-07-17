@@ -1,0 +1,15 @@
+mat-progress-bar{
+    width: 50%;
+}
+img{
+    width: 100px;
+    height: 100px;
+}
+
+form.desno{
+    float: right;
+}
+
+body{
+    background-color: #d3d3d3;
+}

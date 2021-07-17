@@ -1,0 +1,30 @@
+<body>
+<form class='desno'>
+    <button (click)='nazad()' style="height: 50px; width: 75px;"> Nazad</button>
+</form>
+
+<h1>Pregled desavanja</h1>
+
+<div *ngIf='svaDesavanja.length == 0'>Nema desavanja za pregled!</div>
+<table *ngIf='svaDesavanja.length != 0'>
+    <!-- <tr class='centar'>
+         <th>Organizator</th> 
+        <th><h3>Naziv desavanja</h3></th>
+        <th>Pocetak</th>
+        <th>Kraj</th>
+        <th>Opis</th>
+        <th>Ucesnici</th>
+    </tr> -->
+    <tr *ngFor='let tmp of svaDesavanja' (click)='desavanje(tmp)' class='centar'>
+        <!-- <td>{{tmp.organizator}}</td> -->
+        <td><h4><i>{{tmp.naziv}}</i></h4></td>
+        <!-- <td *ngIf='tmp.pocetak'>{{tmp.pocetak}}</td>
+        <td *ngIf='!tmp.pocetak'>/</td>
+        <td *ngIf='tmp.kraj'>{{tmp.kraj}}</td>
+        <td *ngIf='!tmp.kraj'>/</td>
+        <td>{{tmp.opis}}</td>
+        <td>{{tmp.ucesnici}}</td> -->
+        
+    </tr>
+</table>
+</body>

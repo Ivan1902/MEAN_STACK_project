@@ -1,0 +1,101 @@
+<body>
+<div class='boja'>
+<form class='desno'>
+    <button (click)='nazad()' style="height: 50px; width: 75px;"> Nazad</button>
+</form>
+
+<h1>Desavanje</h1>
+<table>
+    <tr>
+        <td>Organizator:</td>
+        <td>{{desavanje.organizator}}</td>
+    </tr>
+    <tr>
+        <td>Naziv:</td>
+        <td>{{desavanje.naziv}}</td>
+    </tr>
+    <tr>
+        <td>Pocetak:</td>
+        <td *ngIf='!promeni'><output type='text' *ngIf='desavanje.pocetak'>{{desavanje.pocetak}}</output>
+            <output type='text' *ngIf='!desavanje.pocetak'>/</output></td>
+        <td *ngIf='promeni'> <input type='date' name='pocetak' [(ngModel)]='desavanje.pocetak'></td>
+    </tr>
+    <tr>
+        <td>Kraj:</td>
+        <td *ngIf='!promeni'><output type='text' *ngIf='desavanje.kraj'>{{desavanje.kraj}}</output>
+            <output type='text' *ngIf='!desavanje.kraj'>/</output></td>
+        <td *ngIf='promeni'> <input type='date' name='kraj' [(ngModel)]='desavanje.kraj'></td>
+    </tr>
+    <tr>
+        <td>Opis:</td>
+        <td>{{desavanje.opis}}</td>
+    </tr>
+    <tr >
+        <td>Ucesnici:</td>
+        <td *ngIf='desavanje.ucesnici.length'>{{desavanje.ucesnici}}</td>
+        <td *ngIf='!desavanje.ucesnici.length'> / </td>
+    </tr>
+    <tr>
+        <td>Status</td>
+        <td *ngIf='desavanje.status'>Aktivan</td>
+        <td *ngIf='!desavanje.status'>Zatvoren</td>
+    </tr>
+    <tr>
+        <td>Tip:</td>
+        <td> {{desavanje.tip}}</td>
+    </tr>
+    <tr *ngIf='promeni'>
+        <button (click)='potvrdi()'>Potvrdi</button>
+    </tr>
+    <tr *ngIf='poruka2'>
+        <i>{{poruka2}}</i>
+    </tr>
+</table>
+<hr>
+<div *ngIf='flag1'>
+
+    <button (click)='aktiviraj()'>Aktiviraj desavanje</button> |
+    <button (click)='zatvori()'>Zatvori desavanje</button>
+    <div *ngIf='poruka1'>
+        {{poruka1}}
+    </div>
+    <hr>
+</div>
+
+<div *ngIf='flag2'>
+    
+    <div><b><i>Svi komentari:</i></b></div>
+    <div *ngIf='!komentari.length'> <i>Nema komentara za prikaz!</i></div>
+    <div *ngFor='let komentar of komentari'>
+        <div><b>{{komentar.korisnik}} </b> : <i>{{ komentar.komentar}}</i></div>
+    </div>
+    <hr>
+</div>
+<div *ngIf='flag3'>
+    
+    <button (click)='posalji()'>Posalji zahtev</button>
+    <div *ngIf='poruka3'>
+        {{poruka3}}
+    </div>
+    <hr>
+</div>
+<div *ngIf='flag6'>
+    <button (click)='prijavi_se()'>Prijavi se za desavanje</button>
+    <div *ngIf='poruka5'>
+        {{poruka5}}
+    </div>
+</div>
+
+<div *ngIf='flag4'>
+    {{poruka4}}
+    <hr>
+</div>
+
+<div *ngIf='flag5'>
+    <b>Ostavite komentar:</b> 
+    <textarea name='komentar' [(ngModel)]='komentar'></textarea>
+    <br>
+    <button (click)='ostaviKomentar()'>Potvrdi</button>
+</div>
+</div>
+</body>

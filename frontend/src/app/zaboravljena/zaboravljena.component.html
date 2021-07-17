@@ -1,0 +1,28 @@
+<body>
+<form class='desno'>
+    <button (click)='nazad()' style="height: 50px; width: 75px;"> Nazad</button>
+</form>
+<h1>Zaboravljena sifra</h1>
+<form>
+    <table>
+        <tr>
+            <td>
+                Email:
+            </td>
+            <td>
+                <input type='email' name='email' [(ngModel)]='email'>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button (click)='posalji()'>Posalji mail</button>
+            </td>
+        </tr>
+        <tr>
+            <td *ngIf='poruka'>
+                {{poruka}}
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
